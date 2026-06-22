@@ -93,7 +93,38 @@ button:hover{
 
 <p id="progress-text">0 / 2000 мл</p>
 </div>
+<script>
+let water = Number(localStorage.getItem("water")) || 0;
+const goal = 2000;
 
+const amountText = document.getElementById("amount");
+const progressBar = document.getElementById("progress");
+const progressText = document.getElementById("progress-text");
+
+function updateScreen() {
+  amountText.textContent = water + " мл";
+  progressText.textContent = water + " / " + goal + " мл";
+
+  let percent = (water / goal) * 100;
+  if (percent > 100) percent = 100;
+
+  progressBar.style.width = percent + "%";
+
+  localStorage.setItem("water", water);
+}
+
+function addWater(amount) {
+  water += amount;
+  updateScreen();
+}
+
+function resetWater() {
+  water = 0;
+  updateScreen();
+}
+
+updateScreen();
+</script>
 
 </body>
 </html>
