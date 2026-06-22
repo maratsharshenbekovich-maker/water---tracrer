@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Трекер воды</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f8fb;
+    text-align:center;
+    padding:40px;
+}
+
+.container{
+    max-width:400px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+h1{
+    color:#2196f3;
+}
+
+.water{
+    font-size:60px;
+    margin:20px 0;
+}
+
+.progress{
+    width:100%;
+    height:20px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin:20px 0;
+}
+
+.bar{
+    width:0%;
+    height:100%;
+    background:#2196f3;
+    transition:.3s;
+}
+
+button{
+    background:#2196f3;
+    color:white;
+    border:none;
+    padding:15px 20px;
+    margin:5px;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1976d2;
+}
+
+.reset{
+    background:#f44336;
+}
+
+.reset:hover{
+    background:#d32f2f;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>💧 Трекер воды</h1>
+
+<div class="water" id="water">0 мл</div>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+<p id="text">0 / 2000 мл</p>
+
+<button onclick="addWater(250)">+250 мл</button>
+<button onclick="addWater(500)">+500 мл</button>
+<button class="reset" onclick="resetWater()">Сброс</button>
+
+</div>
+
+<script>
+
+let water = 0;
+const goal = 2000;
+
+function addWater(amount){
+    water += amount;
+
+    if(water > goal){
+        water = goal;
+    }
+
+    update();
+}
+
+function resetWater(){
+    water = 0;
+    update();
+}
+
+function update(){
+
+    document.getElementById("water").innerText = water + " мл";
+
+    document.getElementById("text").innerText =
+        water + " / " + goal + " мл";
+
+    let percent = (water / goal) * 100;
+
+    document.getElementById("bar").style.width = percent + "%";
+
+    if(water === goal){
+        alert("🎉 Поздравляем! Вы выпили дневную норму воды!");
+    }
+
+}
+
+update();
+
+</script>
+
+</body>
+</html>
