@@ -89,49 +89,15 @@ button:hover{
 <button onclick="addWater(250)">+250 мл</button>
 <button onclick="addWater(500)">+500 мл</button>
 <button class="reset" onclick="resetWater()">Сброс</button>
+<h1 id="amount">0 мл</h1>
 
+<div class="progress">
+    <div id="progress"></div>
 </div>
 
-<script>
+<p id="progress-text">0 / 2000 мл</p>
+</div>
 
-let water = 0;
-const goal = 2000;
-
-function addWater(amount){
-    water += amount;
-
-    if(water > goal){
-        water = goal;
-    }
-
-    update();
-}
-
-function resetWater(){
-    water = 0;
-    update();
-}
-
-function update(){
-
-    document.getElementById("water").innerText = water + " мл";
-
-    document.getElementById("text").innerText =
-        water + " / " + goal + " мл";
-
-    let percent = (water / goal) * 100;
-
-    document.getElementById("bar").style.width = percent + "%";
-
-    if(water === goal){
-        alert("🎉 Поздравляем! Вы выпили дневную норму воды!");
-    }
-
-}
-
-update();
-
-</script>
 
 </body>
 </html>
